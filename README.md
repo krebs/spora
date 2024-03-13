@@ -9,8 +9,7 @@ if you don't use clan or don't want this network as your primary. you can import
 ```nix
 {inputs, ...}: {
   imports = [
-    inputs.spora.nixosModules.mycelium
-    inputs.spora.nixosModules.hosts
+    inputs.spora.nixosModules.spora
   ];
 }
 ```
