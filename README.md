@@ -1,10 +1,10 @@
 # spora network
 
-this is a flake which exports some functions to join the spora network
+This is a flake which exports some functions to join the spora network
 
 ## join
 
-if you don't use clan or don't want this network as your primary. you can import our zerotier module:
+If you don't use clan or don't want this network as your primary. you can import our mycelium module:
 
 ```nix
 {inputs, ...}: {
@@ -19,13 +19,13 @@ First `git clone` this repository. Then
 for your host to be accepted into the network the id needs to be whitelisted.
 So add your host file to hosts:
 
-if your client doesn't have any public reachable endpoints, just run:
+If your client doesn't have any public reachable endpoints, just run:
 
 ```
 mycelium inspect "$myPubkey" --json > hosts/$(hostname).json
 ```
 
-if your machine has public endpoints add them like this:
+If your machine has public endpoints add them like this:
 
 ```
 mycelium inspect "$myPubkey" --json |
