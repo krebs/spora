@@ -66,6 +66,7 @@
                 (lib.optionals (cfg.keyFile != null) "--key-file ${cfg.keyFile}")
                 "--tun-name" "myc"
                 "--peers" cfg.peers
+                "--debug"
               ]);
               Restart = "always";
               RestartSec = 2;
