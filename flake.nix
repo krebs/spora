@@ -68,11 +68,31 @@
             ];
 
             serviceConfig = {
+              User = "mycelium";
+              DynamicUser = true;
+              StateDirectory = "mycelium";
+              ProtectHome = true;
+              ProtectSystem = true;
+              LoadCredential = lib.mkIf (cfg.keyFile != null) "keyfile:${cfg.keyFile}";
+              SyslogIdentifier = "mycelium";
+              AmbientCapabilities = [ "CAP_NET_ADMIN" ];
+              MemoryDenyWriteExecute = true;
+              ProtectControlGroups = true;
+              ProtectKernelModules = true;
+              ProtectKernelTunables = true;
+              RestrictAddressFamilies = "AF_UNIX AF_INET AF_INET6 AF_NETLINK";
+              RestrictNamespaces = true;
+              RestrictRealtime = true;
+              SystemCallArchitectures = "native";
+              SystemCallFilter = [ "@system-service" "~@privileged @keyring" ];
               ExecStart = lib.concatStringsSep " " (lib.flatten [
                 (lib.getExe cfg.package)
-                (lib.optionals (cfg.keyFile != null) "--key-file ${cfg.keyFile}")
+                (if (cfg.keyFile != null) then
+                  "--key-file \${CREDENTIALS_DIRECTORY}/keyfile" else
+                  "--key-file %S/mycelium/key.bin"
+                )
                 "--debug"
-                "--tun-name" "myc"
+                "--tun-name" "mycelium"
                 "--peers" cfg.peers
                 (lib.optionals cfg.addHostedNodes [
                   "tcp://188.40.132.242:9651" # DE 01
@@ -107,10 +127,8 @@
                 ])
               ]);
               Restart = "always";
-              RestartSec = 2;
-              StateDirectory = "mycelium";
-
-              # TODO: Hardening
+              RestartSec = 5;
+              TimeoutStopSec = 5;
             };
           };
         };
