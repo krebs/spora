@@ -48,11 +48,11 @@
             default = pkgs.mycelium;
             description = "The mycelium package to use";
           };
-          addUpstreamPeers = lib.mkOption {
+          addHostedNodes = lib.mkOption {
             type = lib.types.bool;
             default = true;
             description = ''
-              add the upstream peers from https://github.com/threefoldtech/mycelium#hosted-public-nodes
+              add the hosted peers from https://github.com/threefoldtech/mycelium#hosted-public-nodes
             '';
           };
         };
@@ -74,7 +74,7 @@
                 "--debug"
                 "--tun-name" "myc"
                 "--peers" cfg.peers
-                (lib.optionals cfg.addUpstreamPeers [
+                (lib.optionals cfg.addHostedNodes [
                   "tcp://188.40.132.242:9651" # DE 01
                   "tcp://[2a01:4f8:221:1e0b::2]:9651"
                   "quic://188.40.132.242:9651"
