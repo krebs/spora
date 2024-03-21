@@ -133,7 +133,7 @@
         };
       };
 
-      spora = { lib, ... }: {
+      spora = { config, lib, ... }: {
         imports = [
           self.nixosModules.mycelium
           self.nixosModules.hosts
@@ -142,7 +142,8 @@
           enable = true;
           openFirewall = true;
           peers = let
-            hostsWithIps = lib.filterAttrs (name: host: lib.hasAttr "public_endpoints" host) self.lib.hosts;
+            hostsWithoutSelf = lib.filterAttrs (name: _: name != config.networking.hostName) self.lib.hosts;
+            hostsWithIps = lib.filterAttrs (name: host: lib.hasAttr "public_endpoints" host) hostsWithoutSelf;
           in
             lib.flatten (map (host: host.public_endpoints) (lib.attrValues hostsWithIps));
         };
