@@ -1,10 +1,4 @@
 {
-  "publicKey": "7610281c0d71f8f2fe625c14b10596b568ff054f1f834096e7063cc5c0892132",
-  "address": "5a4:ba4d:a307:92cc:cc:9dbb:62db:2545",
-  "public_endpoints": [
-    "tcp://95.217.192.59:9651",
-    "quic://95.217.192.59:9651",
-    "tcp://[2a01:4f9:4a:4f1a::2]:9651",
-    "quic://[2a01:4f9:4a:4f1a::2]:9651"
-  ]
+  "publicKey": "c3a3ad7848c09374ebd4e001eb421bb7dc7082523a7bde7a14a97e9148c1a54c",
+  "address": "5bd:d41c:27fa:5ae7:b5a5:b0b:341:d86b"
 }
